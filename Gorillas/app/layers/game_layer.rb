@@ -40,21 +40,30 @@ class GameLayer < Joybox::Core::Layer
     end
 
 
-    on_touches_ended do |touches, event|
+#    on_touches_ended do |touches, event|
+#
+#      end_touch = touches.any_object
+#
+#      end_touch_location = end_touch.location
+#
+#      banana = new_banana_sprite
+#
+#      self << banana
+#
+#      banana.body.apply_force force: (end_touch_location - @starting_touch_location)
+#    end
 
-      end_touch = touches.any_object
-
-      end_touch_location = end_touch.location
-
-      banana = new_banana_sprite
-
-      self << banana
-
-      banana.body.apply_force force: (end_touch_location - @starting_touch_location)
-    end
-
+    @duration = 0
+    @timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector:'throwBanana', userInfo:nil, repeats:true)
   end
 
+  def throwBanana
+    @duration = @duration + 1
+    puts "entered here : " + @duration.to_s
+    banana = new_banana_sprite
+    self << banana
+    banana.body.apply_force force: (CGPointMake(rand(320),120))
+  end
 
   def new_banana_sprite
 
