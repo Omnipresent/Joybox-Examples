@@ -50,10 +50,10 @@ class GameLayer < Joybox::Core::Layer
     end
 
     @duration = 0
-    @timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector:'throwBanana', userInfo:nil, repeats:true)
+    @timer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector:'throw_banana', userInfo:nil, repeats:true)
   end
 
-  def throwBanana
+  def throw_banana
     @duration = @duration + 1
     banana = new_banana_sprite
     self << banana
@@ -68,7 +68,6 @@ class GameLayer < Joybox::Core::Layer
         polygon_fixure box: [6, 6],
                        friction: 10.8,
                        density: 2.5
-                       #,restitution: 0.5
     end 
 
     @banana_sprite = PhysicsSprite.new file_name: 'banana.png',
